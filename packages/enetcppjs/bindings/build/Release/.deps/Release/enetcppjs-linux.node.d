@@ -1,0 +1,1 @@
+cmd_Release/enetcppjs-linux.node := ln -f "Release/obj.target/enetcppjs-linux.node" "Release/enetcppjs-linux.node" 2>/dev/null || (rm -rf "Release/enetcppjs-linux.node" && cp -af "Release/obj.target/enetcppjs-linux.node" "Release/enetcppjs-linux.node")

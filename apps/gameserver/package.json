@@ -1,17 +1,21 @@
 {
   "name": "@repo/gameserver",
+  "version": "0.0.1",
   "main": "./src/main.ts",
   "scripts": {
-    "dev": "ts-node -T src/main",
+    "dev": "yarn ts-node -T src/main",
     "watch": "node .esbuild.cjs --watch",
     "build": "node .esbuild.cjs",
+    "build:cpp": "yarn workspace navmeshcppjs build & yarn workspace enetcppjs build",
+    "predev": "yarn build:cpp",
+    "predev2": "yarn build:cpp",
     "dev2": "node .esbuild.cjs && node --enable-source-maps --trace-warnings dist/main"
   },
   "dependencies": {
     "@repo/gamedata": "*",
+    "@repo/geometry": "*",
     "@repo/network": "*",
     "@repo/packets": "*",
-    "@repo/geometry": "*",
     "enetcppjs": "*",
     "navmeshcppjs": "*",
     "three": "^0.171.0",
@@ -21,6 +25,8 @@
     "@types/three": "^0.171.0",
     "@types/ws": "^8.5.13",
     "esbuild": "0.24.2",
-    "typed-emitter": "^2.1.0"
+    "ts-node": "^10.9.2",
+    "typed-emitter": "^2.1.0",
+    "typescript": "^5.7.2"
   }
 }

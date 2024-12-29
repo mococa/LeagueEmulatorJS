@@ -1,6 +1,7 @@
 {
   "name": "@repo/packets",
   "private": true,
+  "version": "0.0.1",
   "dependencies": {
     "@repo/network": "*",
     "@repo/geometry": "*"

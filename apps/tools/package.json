@@ -1,5 +1,6 @@
 {
   "name": "@repo/tools",
+  "version": "0.0.1",
   "scripts": {
     "pi": "ts-node -T packet-inspector"
   },

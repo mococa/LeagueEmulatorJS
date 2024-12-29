@@ -1,6 +1,7 @@
 {
     "name": "leagueemulatorjs",
     "private": true,
+    "version": "0.0.1",
     "workspaces": [
         "apps/*",
         "packages/*"
@@ -9,8 +10,8 @@
         "@types/node": "^22.10.2"
     },
     "scripts": {
-        "dev": "cd apps && cd gameserver && ts-node -T src/main",
-        "pi": "cd apps && cd tools && ts-node -T packet-inspector",
+        "dev": "yarn workspace @repo/gameserver dev2",
+        "pi": "cd apps && cd tools && yarn ts-node -T packet-inspector",
         "check-types": "cd apps && cd gameserver && tsc --noEmit"
     }
 }

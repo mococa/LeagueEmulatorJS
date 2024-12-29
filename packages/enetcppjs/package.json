@@ -1,0 +1,17 @@
+{
+  "name": "enetcppjs",
+  "main": "src/enet.js",
+  "version": "0.0.1",
+  "devDependencies": {
+    "@types/node": "^20.11.19"
+  },
+  "dependencies": {
+    "node-addon-api": "5.1.0",
+    "node-gyp": "11.0.0"
+  },
+  "scripts": {
+    "configure-gyp": "cd bindings && node-gyp configure",
+    "build-gyp": "cd bindings && node-gyp build",
+    "build": "yarn configure-gyp && yarn build-gyp"
+  }
+}
