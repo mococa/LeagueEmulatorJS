@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "yarn ts-node -T src/main",
     "watch": "node .esbuild.cjs --watch",
+    "prebuild": "yarn build:cpp",
     "build": "node .esbuild.cjs",
     "build:cpp": "yarn workspace navmeshcppjs build & yarn workspace enetcppjs build",
     "predev": "yarn build:cpp",
