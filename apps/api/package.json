@@ -1,0 +1,22 @@
+{
+  "name": "@repo/api",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@elysiajs/node": "^1.2.3",
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.7.0",
+    "elysia": "^1.2.9",
+    "sqlite3": "^5.1.7"
+  },
+  "scripts": {
+    "build:js": "yarn esbuild src/index.ts --bundle --platform=node --format=cjs --external:better-sqlite3 --outdir=dist --loader:.node=file --loader:.yaml=text --minify --minify-identifiers",
+    "prestart": "yarn build:js",
+    "start": "node dist"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/better-sqlite3": "^7.6.12"
+  }
+}
