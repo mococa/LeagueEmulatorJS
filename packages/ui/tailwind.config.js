@@ -1,13 +1,9 @@
-const { resolve } = require("path");
-
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./src/**/*.njs",
     "./src/**/*.jsx",
     "./src/**/*.nts",
     "./src/**/*.tsx",
-    resolve(__dirname, "../../node_modules/@repo/ui/src/**/*.tsx"),
   ],
   theme: {
     extend: {},

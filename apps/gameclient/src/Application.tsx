@@ -1,13 +1,13 @@
 import Nullstack, { NullstackClientContext, NullstackNode, type BaseNullstackClientContext } from 'nullstack'
 
 import '../tailwind.css'
-import Home from './Home'
+import { Login } from './Login'
 
 declare function Head(): NullstackNode
 
 class Application extends Nullstack {
 
-  prepare({ page, settings }: NullstackClientContext) {
+  prepare({ page }: NullstackClientContext) {
     page.locale = 'en-US'
   }
 
@@ -26,9 +26,10 @@ class Application extends Nullstack {
 
   render() {
     return (
-      <body class="bg-gray-900 text-white font-roboto">
+      <body class="bg-gray-900 font-quadrat">
         <Head />
-        <Home route="/" greeting="Welcome to Nullstack!" />
+
+        <Login route="/" />
 
         <script src="/js/neutralino.js" />
         <script src="/js/main.js" />

@@ -1,8 +1,11 @@
 {
   "compilerOptions": {
+    "lib": ["es2015", "DOM"],
     "strict": false,
     "noImplicitAny": false,
-    "moduleResolution": "Node",
-    "jsx": "preserve"
-  }
+    "jsx": "preserve",
+    "skipLibCheck": true,
+    "typeRoots": ["./node_modules/@types", "./src/@types"]
+  },
+  "exclude": ["node_modules"]
 }

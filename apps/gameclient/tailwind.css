@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "Friz Quadrata";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Friz Quadrata Regular OS"),
+    url("fonts/friz-quadrata-regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Quadrat Serial Light Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Quadrat Serial Light Regular"),
+    url("fonts/quadrat-serial-light-regular.ttf") format("truetype");
+}
