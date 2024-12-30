@@ -7,7 +7,16 @@ This project is being created as just for fun and learn and will be discontinued
 anyway making it in JS is not the best idea.  
 At the moment, it ~~does not support multiplayer~~ and there is no game flow yet.
 
-# Runing
+# Client
+
+```bash
+yarn # (if you haven't already)
+yarn build # Or yarn workspace @repo/gameclient build
+```
+
+then open binary on apps/gameclient/dist/LeagueClient/
+
+# Running
 
 ```
 # download and install git (optional) - https://git-scm.com/download
