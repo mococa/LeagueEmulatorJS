@@ -1,0 +1,19 @@
+{
+  "name": "@repo/gameclient",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@neutralinojs/neu": "11.3.0",
+    "nullstack": "~0.20.0",
+    "postcss-loader": "^7.0.1",
+    "tailwindcss": "^3.0.0"
+  },
+  "scripts": {
+    "start": "npx nullstack start",
+    "build": "npx nullstack build --mode=ssg",
+    "desktop": "npx @neutralinojs/neu update && npx @neutralinojs/neu build",
+    "postbuild": "yarn desktop"
+  }
+}
