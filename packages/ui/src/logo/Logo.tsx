@@ -20,11 +20,12 @@ export const Logo = ({ ...props }: LogoProps) => {
             class={twMerge([
                 "object-contain",
                 "select-none",
+                "drop-shadow-lg",
                 props.class,
             ])}
             draggable="false"
-            src="/lol-banner.png"
-            style="filter: drop-shadow(2px 4px 6px black);"
+            src="/static/lol-banner.png"
+        // style="filter: drop-shadow(2px 4px 6px black);"
         />
     );
 }

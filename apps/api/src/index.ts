@@ -5,8 +5,8 @@ import { Elysia } from 'elysia'
 /* ---------- Database ---------- */
 import { SQLite } from './database/sqlite'
 
-/* ---------- DTOs ---------- */
-import { dtos } from './dtos'
+/* ---------- Controllers ---------- */
+import { AuthController, FriendsController, UsersController } from './controllers'
 
 /* ---------- Services ---------- */
 import { Services } from './services'
@@ -16,15 +16,10 @@ database.connect();
 
 new Elysia({ adapter: node() })
     .state({ services: new Services({ database }) })
-    // Authentication
-    .post('/sign-up', async ({ store, body }) =>
-        await store.services.authentication.signup(body),
-        dtos.signUp
-    )
-    .post('/sign-in', async ({ store, body }) =>
-        await store.services.authentication.signin(body),
-        dtos.signIn
-    )
+    .use([AuthController, FriendsController, UsersController])
+    .onRequest(({ request }) => {
+        console.log('request done.', request.body)
+    })
     .listen(3000, ({ hostname, port }) => {
         console.log(`🦊 Elysia is running at ${hostname}:${port}`)
     })

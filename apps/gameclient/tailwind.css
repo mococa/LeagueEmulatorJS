@@ -17,3 +17,35 @@
   src: local("Quadrat Serial Light Regular"),
     url("fonts/quadrat-serial-light-regular.ttf") format("truetype");
 }
+
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Figtree-Regular"),
+    url("fonts/Figtree/Figtree-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: medium;
+  src: local("Figtree-Medium"),
+    url("fonts/Figtree/Figtree-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: 600;
+  src: local("Figtree-SemiBold"),
+    url("fonts/Figtree/Figtree-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: 700;
+  src: local("Figtree-Bold"),
+    url("fonts/Figtree/Figtree-Bold.ttf") format("truetype");
+}

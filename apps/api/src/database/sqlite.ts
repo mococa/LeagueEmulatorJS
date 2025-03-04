@@ -1,5 +1,5 @@
 /* ---------- External ---------- */
-import Database, { Database as TDatabase } from "better-sqlite3";
+import Database, { Database as TDatabase } from "bun:sqlite";
 
 /* ---------- Database ---------- */
 import { Database as AbstractDatabase } from "./database";
@@ -9,11 +9,41 @@ export class SQLite extends AbstractDatabase {
 
     constructor() {
         super();
-        this.db = new Database('database.db', { verbose: console.log });
+        this.db = new Database('database.db');
     }
 
     async migrate() {
-        await this.query('CREATE TABLE IF NOT EXISTS accounts (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT)');
+        await this.query(`
+            CREATE TABLE IF NOT EXISTS accounts (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT, 
+                password TEXT,
+                created_at INTEGER NOT NULL,
+                updated_at INTEGER NOT NULL
+            );
+        `);
+
+        await this.query(`
+            CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                account_id INTEGER UNIQUE NOT NULL REFERENCES accounts(id),
+                nickname TEXT UNIQUE NOT NULL,
+                avatar TEXT NOT NULL,
+                created_at INTEGER NOT NULL,
+                updated_at INTEGER NOT NULL
+            );
+        `);
+
+        await this.query(`
+            CREATE TABLE IF NOT EXISTS friends (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL REFERENCES users(id),
+                friend_id INTEGER NOT NULL REFERENCES users(id),
+                status TEXT NOT NULL,
+                created_at INTEGER NOT NULL,
+                updated_at INTEGER NOT NULL
+            );
+        `);
     }
 
     async connect() {
@@ -26,10 +56,8 @@ export class SQLite extends AbstractDatabase {
         this.db.close();
     }
 
-    async query<T>(query: string, params: (string | number | boolean)[] = []): Promise<T> {
+    async query<T>(query: string, params: (string | number | boolean | null)[] = []): Promise<T> {
         const stmt = this.db.prepare(query);
-        if (!params.length) return stmt.run() as T;
-        if (query.includes('SELECT')) return stmt.all(params) as T;
-        return stmt.run(params) as T;
+        return stmt.all(...params) as T;
     }
 }

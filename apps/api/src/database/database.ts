@@ -17,5 +17,5 @@ export abstract class Database {
      * 
      * @param query The query to execute.
      */
-    abstract query<T>(query: string, params: (string | number | boolean)[]): Promise<T>;
+    abstract query<T extends Record<string, unknown>>(query: string, params: (string | number | boolean)[]): Promise<T & T[]>;
 }

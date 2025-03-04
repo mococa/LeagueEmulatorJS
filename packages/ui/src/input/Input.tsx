@@ -18,7 +18,7 @@ interface InputProps extends HTMLAttributes<HTMLInputElement> {
 export const Input = ({ label, type, ...props }: InputProps) => {
     if (label) return (
         <label class="block">
-            <span class="font-medium text-white">Username</span>
+            <span class="font-medium text-white">{label}</span>
 
             <input
                 {...props}

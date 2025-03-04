@@ -3,6 +3,7 @@ import { compareSync, hashSync } from "bcryptjs";
 
 /* ---------- Database ---------- */
 import type { Database } from "../database/database";
+import { Models } from "../models/models";
 
 /* ---------- Interfaces ---------- */
 interface SignUp {
@@ -39,12 +40,17 @@ export class Authentication {
     async signup({ username, password, confirmPassword }: SignUp) {
         if (password !== confirmPassword) throw new PasswordMismatch();
 
-        const accounts = await this.database.query<User[]>('SELECT * FROM accounts WHERE username = ?', [username]) || [];
-        if (accounts.length) throw new UsernameAlreadyExists();
+        const [duplicated] = await this.database.query('SELECT * FROM accounts WHERE username = ?', [username]);
+        if (duplicated) throw new UsernameAlreadyExists();
 
-        await this.database.query('INSERT INTO accounts (username, password) VALUES (?, ?)', [username, hashSync(password, 10)]);
+        const [account] = await this.database.query(`
+            INSERT INTO accounts (username, password, created_at, updated_at)
+            VALUES (?, ?, ?, ?)
+            RETURNING id, username, created_at, updated_at;
+        `, [username, hashSync(password, 10), Date.now(), Date.now()]);
 
-        return { username }
+        Models.Account.deserialize(account);
+        return account;
     }
 
     /**
@@ -55,10 +61,10 @@ export class Authentication {
      * @param {SignIn} params Request body 
     */
     async signin({ username, password }: SignIn) {
-        const accounts = await this.database.query<User[]>('SELECT * FROM accounts WHERE username = ?', [username]) || [];
-        if (!accounts.length) throw new InvalidCredentials();
+        const [account] = await this.database.query('SELECT * FROM accounts WHERE username = ?', [username]) || [];
+        if (!account) throw new InvalidCredentials();
 
-        const [user] = accounts;
+        const user = Models.Account.deserialize(account);
 
         const match = compareSync(password, user.password);
         if (!match) throw new InvalidCredentials();

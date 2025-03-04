@@ -1,5 +1,5 @@
 /* ---------- External ---------- */
-import Nullstack from "nullstack";
+import Nullstack, { type NullstackClientContext } from "nullstack";
 
 /* ---------- UI ---------- */
 import { Button, Checkbox, Input, Logo } from "@repo/ui";
@@ -17,8 +17,9 @@ export class Login extends Nullstack {
      * @description
      * Login authentication handler
      */
-    async submit() {
+    async submit({ router }: Partial<NullstackClientContext>) {
         console.log('submit', this.username, this.password);
+        router.path = '/home';
     }
 
     /**
@@ -44,9 +45,9 @@ export class Login extends Nullstack {
 
                     <div class="form-wrapper mx-auto mb-4">
                         <form class="space-y-4" onsubmit={this.submit}>
-                            <Input label="Username" bind={this.username} />
+                            <Input label="Username" bind={this.username} class="text-black" />
 
-                            <Input label="Password" type="password" bind={this.password} />
+                            <Input label="Password" type="password" bind={this.password} class="text-black" />
 
                             <div class="flex items-start justify-between mt-4">
                                 <Checkbox label="Remember Username" bind={this.rememberUsername} />
@@ -108,7 +109,7 @@ export class Login extends Nullstack {
 
     render() {
         return (
-            <main class="flex items-center justify-start h-screen bg-gradient-to-br from-[#1a1a1a] to-[#000000]">
+            <main class="flex items-center justify-start h-screen bg-gradient-to-br font-quadrat from-[#1a1a1a] to-[#000000]">
                 {this.renderForm()}
                 {this.renderBackground()}
             </main>

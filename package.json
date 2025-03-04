@@ -10,6 +10,7 @@
         "@types/node": "^22.10.2"
     },
     "scripts": {
+        "api": "yarn workspace @repo/api dev",
         "dev": "yarn workspace @repo/gameserver dev2",
         "build": "yarn workspace @repo/gameserver build && yarn workspace @repo/gameclient build",
         "pi": "cd apps && cd tools && yarn ts-node -T packet-inspector",
